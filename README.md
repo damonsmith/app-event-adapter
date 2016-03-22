@@ -25,29 +25,69 @@ How to use
 
 As a way to handle events on a canvas:
 
+An example in the style of inline handlers
+------------------------------------------
+
 ```javascript
 var AppEventAdapter = require('app-event-adapter');
 
-var eventAdapter = new AppEventAdapter();
-eventAdapter.connectToElement(canvas);
+function defineHandlers() {
 
-How to subscribe to an event:
-eventAdapter.subscribe("mousedown", this.handleMouseDown, this);
+	var canvas = document.getElementById("myCanvas");
 
-And your event handler:
-MyClass.prototype.handleMouseDown = function(event) {
-	this.startDrawing();//or whatever
-}
-MyClass.prototype.handleDrag = function(drag) {
-	//(this is called with a "drag" argument with the x,y and the dx,dy movements.
-	this.moveScreen(drag.dx, drag.dy);
+	var eventAdapter = new AppEventAdapter();
+	eventAdapter.connectToElement(canvas);
+
+	eventAdapter.subscribe("mousedown", function(event) {
+		console.log('mouse down at: ', event.x, event.y);
+	});
+
+	eventAdapter.subscribe("drag", function(drag) {
+		console.log('drag (mouse or touch) went: ', drag.dx, drag.dx, 'starting at', drag.x, drag.y);
+	});
+
+	//and all the other marvellous events that AppEventAdapter can give you!!...
 }
 ```
 
-Events you can subscribe to, and what they will call:
+An example in posh fancy ES5 class style
+----------------------------------------
+
+```javascript
+
+var AppEventAdapter = require('app-event-adapter');
+
+function MyActionGameClass() {
+
+	var canvas = document.getElementById("myCanvas");
+
+	var eventAdapter = new AppEventAdapter();
+	eventAdapter.connectToElement(canvas);
+
+	eventAdapter.subscribe('mousedown', this.handleMouseDown, this);
+	eventAdapter.subscribe('twist', this.handleTwist, this);
+	eventAdapter.subscribe('tap', this.handleTap, this);
+
+}
+
+MyActionGameClass.prototype.handleMouseDown = function(event) {
+	//Do something specific to mouses here, as opposed to the tap event.
+}
+
+MyActionGameClass.prototype.handleTwist = function(event) {
+	//Do something fancy with two-fingered twist action, like rotate map
+}
+
+MyActionGameClass.prototype.handleTap = function(event) {
+	//Do something generic for all taps or clicks
+}
+```
+
+Events you can subscribe to, and what they pass you
+===================================================
 
 Native events
-=============
+-------------
 * resize - event
 * mousewheel - amount
 * mousedown - event.button, pos: {x: number, y: number}, event
@@ -66,7 +106,7 @@ Native events
 * visibilitychange -  
 
 Derived events
-==============
+--------------
 * dragstart - mouse click and drag or single touch drag
 * drag -  
 * dragstop
