@@ -256,6 +256,7 @@ AppEventAdapter.prototype.touchStart = function(event) {
 		prevDist = 0;
 		this.startDrag(pos);
 
+		this.callSubscribers("tapdown", [pos]);
 		this.callSubscribers("touchstart", [pos]);
 		return this.preventDefault(event);
 	}
@@ -296,6 +297,7 @@ AppEventAdapter.prototype.touchEnd = function(event) {
 			this.numberOfTouches = 0;
 		}
 		this.stopDrag();
+		this.callSubscribers("tapup", [pos]);
 		this.callSubscribers("touchend", [pos]);
 		return this.preventDefault(event);
 	}
