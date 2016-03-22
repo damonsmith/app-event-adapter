@@ -1,11 +1,11 @@
 {
   "name": "app-event-adapter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "dependencies": {},
   "devDependencies": {},
   "license" : "GPL-3.0",
-  "files": ["AppEventAdapter.js"],
+  "files": ["index.js"],
   "repository" :{
 	  "type" : "git",
 	  "url" : "https://github.com/damonsmith/app-event-adapter.git"
