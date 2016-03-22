@@ -11,22 +11,25 @@ standard events like mouseUp mouseDown, but with some normalising of the event
 data that you get back. (it basically adds things like .x, .y, .amount onto the
 returned event object so that you can just use those in all browsers.)
 
+Installation
+============
+
+via NPM:
+`npm install --save 'app-event-adapter'`
+
+or simply drop the index.js file into your project somewhere, rename it
+to AppEventAdapter.js and include it locally.
+
 How to use
 ==========
-Use AppEventAdapter to convert the browser events received from a canvas into app
-style events.
 
-Use this class to subscribe not only to normal browser events, like mouseDown, touchEnd
-but also provides some compatibility events: (tap is single click or touch) and derived events
-that require some calculation, like pinch, twist and scroll.
+As a way to handle events on a canvas:
 
-How to connect this to a canvas and disconnect it:
-
+```javascript
 var AppEventAdapter = require('app-event-adapter');
 
 var eventAdapter = new AppEventAdapter();
 eventAdapter.connectToElement(canvas);
-eventAdapter.disconnectFromCanvas();
 
 How to subscribe to an event:
 eventAdapter.subscribe("mousedown", this.handleMouseDown, this);
@@ -39,6 +42,7 @@ MyClass.prototype.handleDrag = function(drag) {
 	//(this is called with a "drag" argument with the x,y and the dx,dy movements.
 	this.moveScreen(drag.dx, drag.dy);
 }
+```
 
 Events you can subscribe to, and what they will call:
 
