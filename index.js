@@ -146,9 +146,9 @@ AppEventAdapter.prototype.resize = function(event) {
 
 AppEventAdapter.prototype.mouseDown = function(event) {
 	if (this.hasSubscribersForEventList(["mousedown", "tapdown", "dragstart", "drag"])) {
-		var pos = {x: event.pageX, y: event.pageY};
-		event.x = event.pageX;
-		event.y = event.pageY;
+		var pos = {x: event.offsetX, y: event.offsetY};
+		event.x = event.offsetX;
+		event.y = event.offsetY;
 		this.startDrag(pos);
 		this.callSubscribers("tapdown", [pos]);
 		this.callSubscribers("mousedown", [event]);
@@ -159,9 +159,9 @@ AppEventAdapter.prototype.mouseDown = function(event) {
 
 AppEventAdapter.prototype.mouseUp = function(event) {
 	if (this.hasSubscribersForEventList(["mouseup", "tapup", "tap", "dragend"])) {
-		var pos = {x: event.pageX, y: event.pageY};
-		event.x = event.pageX;
-		event.y = event.pageY;
+		var pos = {x: event.offsetX, y: event.offsetY};
+		event.x = event.offsetX;
+		event.y = event.offsetY;
 		if (this.wasATap()) {
 			this.callSubscribers("tapup", [event]);
 			this.callSubscribers("tap", [event]);
@@ -179,11 +179,11 @@ AppEventAdapter.prototype.mouseUp = function(event) {
 AppEventAdapter.prototype.mouseMove = function(event) {
 	if (this.hasSubscribersForEventList(["mousemove", "drag"])) {
 		var pos = {
-			x: event.pageX,
-			y: event.pageY
+			x: event.offsetX,
+			y: event.offsetY
 		};
-		event.x = event.pageX;
-		event.y = event.pageY;
+		event.x = event.offsetX;
+		event.y = event.offsetY;
 
 		if (this.dragging.active) {
 			this.drag(pos);
@@ -201,11 +201,11 @@ AppEventAdapter.prototype.mouseLeave = function(event) {
 AppEventAdapter.prototype.mouseWheel = function(event) {
 	if (this.hasSubscribersForEventList(["scroll"])) {
 		var pos = {
-				x: event.pageX,
-				y: event.pageY
+				x: event.offsetX,
+				y: event.offsetY
 		};
-		event.x = event.pageX;
-		event.y = event.pageY;
+		event.x = event.offsetX;
+		event.y = event.offsetY;
 
 		var amount = event.detail;
 		if (event.wheelDelta) {
@@ -249,8 +249,8 @@ AppEventAdapter.prototype.touchStart = function(event) {
 		this.numberOfTouches = Math.max(this.numberOfTouches, event.touches.length);
 
 		var pos = {
-			x: event.changedTouches[0].pageX,
-			y: event.changedTouches[0].pageY
+			x: event.changedTouches[0].offsetX,
+			y: event.changedTouches[0].offsetY
 		};
 
 		prevDist = 0;
@@ -268,8 +268,8 @@ AppEventAdapter.prototype.touchMove = function(event) {
 
 		if (event.touches.length === 1) {
 			pos = {
-					x: event.changedTouches[0].pageX,
-					y: event.changedTouches[0].pageY
+					x: event.changedTouches[0].offsetX,
+					y: event.changedTouches[0].offsetY
 			};
 			this.drag(pos);
 		}
@@ -285,8 +285,8 @@ AppEventAdapter.prototype.touchEnd = function(event) {
 	if (this.hasSubscribersForEventList(["tap", "drag", "touchend", "dragend"])) {
 		var time;
 		var pos = {
-			x: event.changedTouches[0].pageX,
-			y: event.changedTouches[0].pageY
+			x: event.changedTouches[0].offsetX,
+			y: event.changedTouches[0].offsetY
 		};
 
 		if (event.touches.length === 0 && this.wasATap()) {
@@ -337,14 +337,14 @@ AppEventAdapter.prototype.wasATap = function() {
 
 
 AppEventAdapter.prototype.pinch = function(event) {
-	var dx2 = Math.pow(event.touches[0].pageX - event.touches[1].pageX,2);
-	var dy2 = Math.pow(event.touches[0].pageY - event.touches[1].pageY,2);
+	var dx2 = Math.pow(event.touches[0].offsetX - event.touches[1].offsetX,2);
+	var dy2 = Math.pow(event.touches[0].offsetY - event.touches[1].offsetY,2);
 	var dist = Math.sqrt(dx2, dy2);
 
 	var pinch = {
 		l: dist,
 		dl: this.distanceBetweenTouchPair - dist,
-		pos: {x: event.touches[0].pageX, y: event.touches[0].pageY}
+		pos: {x: event.touches[0].offsetX, y: event.touches[0].offsetY}
 	};
 	this.distanceBetweenTouchPair = pinch.l;
 
