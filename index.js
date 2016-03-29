@@ -158,7 +158,7 @@ AppEventAdapter.prototype.mouseDown = function(event) {
 };
 
 AppEventAdapter.prototype.mouseUp = function(event) {
-	if (this.hasSubscribersForEventList(["mouseup", "tapup", "tap", "dragend"])) {
+	if (this.hasSubscribersForEventList(["mouseup", "tapup", "tap", "dragend", "drag"])) {
 		var pos = {x: event.offsetX, y: event.offsetY};
 		event.x = event.offsetX;
 		event.y = event.offsetY;
