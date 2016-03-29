@@ -1,0 +1,100 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/damon/Apps/node-v5.6.0-linux-x64/bin/node',
+1 verbose cli   '/home/damon/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@3.6.0
+3 info using node@v5.6.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/home/damon/Work/Web/app-event-adapter',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /home/damon/.npm/app-event-adapter/0.0.7/package.tgz not in flight; packing
+9 verbose correctMkdir /home/damon/.npm correctMkdir not in flight; initializing
+10 info lifecycle app-event-adapter@0.0.7~prepublish: app-event-adapter@0.0.7
+11 silly lifecycle app-event-adapter@0.0.7~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/home/damon/.npm/app-event-adapter/0.0.7/package.tgz',
+12 verbose tar pack   '/home/damon/Work/Web/app-event-adapter' ]
+13 verbose tarball /home/damon/.npm/app-event-adapter/0.0.7/package.tgz
+14 verbose folder /home/damon/Work/Web/app-event-adapter
+15 verbose addLocalTarball adding from inside cache /home/damon/.npm/app-event-adapter/0.0.7/package.tgz
+16 verbose correctMkdir /home/damon/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd app-event-adapter@0.0.7
+18 verbose afterAdd /home/damon/.npm/app-event-adapter/0.0.7/package/package.json not in flight; writing
+19 verbose correctMkdir /home/damon/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /home/damon/.npm/app-event-adapter/0.0.7/package/package.json written
+21 silly publish { name: 'app-event-adapter',
+21 silly publish   version: '0.0.7',
+21 silly publish   private: false,
+21 silly publish   dependencies: {},
+21 silly publish   devDependencies: {},
+21 silly publish   license: 'GPL-3.0',
+21 silly publish   files: [ 'index.js' ],
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/damonsmith/app-event-adapter.git' },
+21 silly publish   readme: 'App Event Adapter\n=================\n\nGives you app style events in your javascript.\n\nApp Event Adapter is a single js class with no dependencies. To use it, create an\ninstance of it, connect it to an element and add listeners to it\'s events.\n\nIt will give you touch, tap, drag, scroll, pinch, zoom, twist as well as\nstandard events like mouseUp mouseDown, but with some normalising of the event\ndata that you get back. (it basically adds things like .x, .y, .amount onto the\nreturned event object so that you can just use those in all browsers.)\n\nInstallation\n============\n\nvia NPM:\n`npm install --save \'app-event-adapter\'`\n\nor simply drop the index.js file into your project somewhere, rename it\nto AppEventAdapter.js and include it locally.\n\nHow to use\n==========\n\nAs a way to handle events on a canvas:\n\nAn example in the style of inline handlers\n------------------------------------------\n\n```javascript\nvar AppEventAdapter = require(\'app-event-adapter\');\n\nfunction defineHandlers() {\n\n\tvar canvas = document.getElementById("myCanvas");\n\n\tvar eventAdapter = new AppEventAdapter();\n\teventAdapter.connectToElement(canvas);\n\n\teventAdapter.subscribe("mousedown", function(event) {\n\t\tconsole.log(\'mouse down at: \', event.x, event.y);\n\t});\n\n\teventAdapter.subscribe("drag", function(drag) {\n\t\tconsole.log(\'drag (mouse or touch) went: \', drag.dx, drag.dx, \'starting at\', drag.x, drag.y);\n\t});\n\n\t//and all the other marvellous events that AppEventAdapter can give you!!...\n}\n```\n\nAn example in posh fancy ES5 class style\n----------------------------------------\n\n```javascript\n\nvar AppEventAdapter = require(\'app-event-adapter\');\n\nfunction MyActionGameClass() {\n\n\tvar canvas = document.getElementById("myCanvas");\n\n\tvar eventAdapter = new AppEventAdapter();\n\teventAdapter.connectToElement(canvas);\n\n\teventAdapter.subscribe(\'mousedown\', this.handleMouseDown, this);\n\teventAdapter.subscribe(\'twist\', this.handleTwist, this);\n\teventAdapter.subscribe(\'tap\', this.handleTap, this);\n\n}\n\nMyActionGameClass.prototype.handleMouseDown = function(event) {\n\t//Do something specific to mouses here, as opposed to the tap event.\n}\n\nMyActionGameClass.prototype.handleTwist = function(event) {\n\t//Do something fancy with two-fingered twist action, like rotate map\n}\n\nMyActionGameClass.prototype.handleTap = function(event) {\n\t//Do something generic for all taps or clicks\n}\n```\n\nEvents you can subscribe to, and what they pass you\n===================================================\n\nNative events\n-------------\n* resize - event\n* mousewheel - amount\n* mousedown - event.button, pos: {x: number, y: number}, event\n* mouseup - event.button, pos: {x: number, y: number}, event\n* mouseleave -\n* mousemove - pos: {x: number, y: number}\n* touchstart -\n* touchend -\n* touchleave -\n* touchmove -\n* touchcancel -\n* contextmenu -\n* keydown -\n* keyup -\n* keypress -\n* visibilitychange -  \n\nDerived events\n--------------\n* dragstart - mouse click and drag or single touch drag\n* drag -  \n* dragstop\n* tap - abstraction of either a click or a touchscreen tap\n* doubletap - abstraction of either a double click or a double touchscreen tap (2 in a quick succession, not two fingers at once)\n* pinch - {l: number, dl: number} - l is current pinch length, dl is the change in the pinch length\n* scroll - mouse wheel or two touch parallel movement\n* twist - two finger touch twisting\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '1b614e5c2d2e9a15ff4dea8601d761e99d1068a3',
+21 silly publish   description: 'App Event Adapter =================',
+21 silly publish   bugs: { url: 'https://github.com/damonsmith/app-event-adapter/issues' },
+21 silly publish   homepage: 'https://github.com/damonsmith/app-event-adapter#readme',
+21 silly publish   _id: 'app-event-adapter@0.0.7',
+21 silly publish   scripts: {},
+21 silly publish   _shasum: 'fc014e80c31d3aefc9e331086fc8105d899210d0',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name app-event-adapter
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry uri https://registry.npmjs.org/app-event-adapter
+27 verbose publish registryBase https://registry.npmjs.org/
+28 silly publish uploading /home/damon/.npm/app-event-adapter/0.0.7/package.tgz
+29 verbose request uri https://registry.npmjs.org/app-event-adapter
+30 verbose request sending authorization for write operation
+31 info attempt registry request try #1 at 9:05:38 PM
+32 verbose request using bearer token for auth
+33 verbose request id 5285ce1b5f1fff6a
+34 http request PUT https://registry.npmjs.org/app-event-adapter
+35 http 403 https://registry.npmjs.org/app-event-adapter
+36 verbose headers { 'content-type': 'application/json',
+36 verbose headers   'cache-control': 'max-age=300',
+36 verbose headers   'content-length': '95',
+36 verbose headers   'accept-ranges': 'bytes',
+36 verbose headers   date: 'Tue, 29 Mar 2016 10:05:40 GMT',
+36 verbose headers   via: '1.1 varnish',
+36 verbose headers   connection: 'keep-alive',
+36 verbose headers   'x-served-by': 'cache-mel6520-MEL',
+36 verbose headers   'x-cache': 'MISS',
+36 verbose headers   'x-cache-hits': '0',
+36 verbose headers   'x-timer': 'S1459245939.535624,VS0,VE1003' }
+37 verbose request invalidating /home/damon/.npm/registry.npmjs.org/app-event-adapter on PUT
+38 error publish Failed PUT 403
+39 verbose stack Error: "You cannot publish over the previously published version 0.0.7." : app-event-adapter
+39 verbose stack     at makeError (/home/damon/Apps/node-v5.6.0-linux-x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+39 verbose stack     at CachingRegistryClient.<anonymous> (/home/damon/Apps/node-v5.6.0-linux-x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+39 verbose stack     at Request._callback (/home/damon/Apps/node-v5.6.0-linux-x64/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+39 verbose stack     at Request.self.callback (/home/damon/Apps/node-v5.6.0-linux-x64/lib/node_modules/npm/node_modules/request/request.js:198:22)
+39 verbose stack     at emitTwo (events.js:100:13)
+39 verbose stack     at Request.emit (events.js:185:7)
+39 verbose stack     at Request.<anonymous> (/home/damon/Apps/node-v5.6.0-linux-x64/lib/node_modules/npm/node_modules/request/request.js:1035:10)
+39 verbose stack     at emitOne (events.js:95:20)
+39 verbose stack     at Request.emit (events.js:182:7)
+39 verbose stack     at IncomingMessage.<anonymous> (/home/damon/Apps/node-v5.6.0-linux-x64/lib/node_modules/npm/node_modules/request/request.js:962:12)
+40 verbose statusCode 403
+41 verbose pkgid app-event-adapter
+42 verbose cwd /home/damon/Work/Web/app-event-adapter
+43 error Linux 3.13.0-85-generic
+44 error argv "/home/damon/Apps/node-v5.6.0-linux-x64/bin/node" "/home/damon/bin/npm" "publish"
+45 error node v5.6.0
+46 error npm  v3.6.0
+47 error code E403
+48 error "You cannot publish over the previously published version 0.0.7." : app-event-adapter
+49 error If you need help, you may report this error at:
+49 error     <https://github.com/npm/npm/issues>
+50 verbose exit [ 1, true ]
