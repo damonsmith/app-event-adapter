@@ -158,7 +158,7 @@ AppEventAdapter.prototype.mouseDown = function(event) {
 };
 
 AppEventAdapter.prototype.mouseUp = function(event) {
-	if (this.hasSubscribersForEventList(["mouseup", "tapup", "tap", "dragend", "drag"])) {
+	if (this.hasSubscribersForEventList(["mouseup", "tapup", "tap", "dragstop", "drag"])) {
 		var pos = {x: event.offsetX, y: event.offsetY};
 		event.x = event.offsetX;
 		event.y = event.offsetY;
@@ -282,7 +282,7 @@ AppEventAdapter.prototype.touchMove = function(event) {
 };
 
 AppEventAdapter.prototype.touchEnd = function(event) {
-	if (this.hasSubscribersForEventList(["tap", "drag", "touchend", "dragend"])) {
+	if (this.hasSubscribersForEventList(["tap", "drag", "touchend", "dragstop"])) {
 		var time;
 		var pos = {
 			x: event.changedTouches[0].offsetX,
